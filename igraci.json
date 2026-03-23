@@ -1,0 +1,36 @@
+{
+  "igraci": {
+    "golmani": [
+      { "ime": "Đorđe Bosić", "br": 99, "pozicija": "golman" },
+      { "ime": "Božidar Bajoivć", "br": 32, "pozicija": "golman" }
+    ],
+    "krila": [
+      { "ime": "Ivan Jakubović", "br": 6, "pozicija": "Lijevo krilo" },
+      { "ime": "Vukašin Maljenović", "br": 5, "pozicija": "Lijevo krilo" },
+      { "ime": "Andrej Paripović", "br": 8, "pozicija": "Desno krilo" },
+      { "ime": "Filip Stojanović", "br": 14, "pozicija": "Lijevo krilo" },
+      { "ime": "Vukašin Zekić", "br": 18, "pozicija": "Desno krilo" },
+      { "ime": "Aleksej Đekić", "br": 7, "pozicija": "Desno krilo" },
+      { "ime": "Rajko Maričić", "br": 10, "pozicija": "Lijevo krilo" }
+    ],
+    "bekovi": [
+      { "ime": "Dušan Miličević", "br": 13, "pozicija": "Srednji bek" },
+      { "ime": "Todor Milisavljević", "br": 11, "pozicija": "Srednji bek" },
+      { "ime": "Boris Bosić", "br": 22, "pozicija": "Srednji bek" },
+      { "ime": "Dario Đenadija", "br": 9, "pozicija": "Lijevi bek" },
+      { "ime": "Miloš Čekić", "br": 17, "pozicija": "Desni bek" },
+      { "ime": "Antonio Nikoloski", "br": 19, "pozicija": "Lijevi bek" }
+    ],
+    "pivoti": [
+      { "ime": "Aleksandar Vasiljević", "br": 20, "pozicija": "Pivot" },
+      { "ime": "Nikola Đurić", "br": 33, "pozicija": "Pivot" },
+      { "ime": "Aleksa Sarkić", "br": 15, "pozicija": "Pivot" },
+      { "ime": "Radomir Stojanović", "br": 3, "pozicija": "Pivot" }
+    ],
+    "treneri": [
+      { "ime": "Milutin Bogdanović", "pozicija": "Trener" },
+      { "ime": "Srđan Pavilović", "pozicija": "Kondicioni trener" },
+      { "ime": "Siniša Simić", "pozicija": "Ekonom" }
+    ]
+  }
+}
