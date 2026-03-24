@@ -37,9 +37,7 @@ function NavBarComponent() {
         </div>
 
       </div>
-      <div className='mt-2'>
-          <HeroComponent/>
-        </div>
+      
        
     </div>
   </div>

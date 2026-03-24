@@ -5,17 +5,20 @@ import ehf from "../assets/efh.jpg"
 import ehf1 from "../assets/efh1.jpg"
 import bht from "../assets/bht.png"
 import hero from "../assets/hero.png"
+import hero2 from "../assets/hero2.png"
 function HeroComponent() {
   return (
-    <div className='flex gap-15 items-center bg-gray-200'>
-  
+    <div className='flex gap-15 items-center w-full h-[80vh] bg-cover bg-center' style={{ backgroundImage: `url(${hero2})` }}>
+      
+      
+
       <img 
         src={tim} 
         alt='tim' 
-        className="w-260 h-120 object-cover rounded-2xl shadow-xl ml-7"
+        className="w-260 h-120 object-cover rounded-2xl shadow-xl ml-7 opacity-65"
       />
 
-      <div className='mt-2 flex mb-2 flex-col items-center backdrop-blur-sm bg-white/40 p-6 rounded-2xl shadow-lg'>
+      <div className='mt-2 flex mb-2 flex-col items-center backdrop-blur-sm bg-white/40 p-6 rounded-2xl shadow-lg opacity-80'>
         
         <img src={ehf} alt='ehf' className="w-35 h-10 object-contain mt-12 hover:scale-110 transition duration-300"/>
         
