@@ -1,10 +1,16 @@
 import React from 'react'
-import  Hero2Component  from"../components/Hero2Component"
+import  HeroPlayersComponent  from"../components/HeroPlayersComponent"
+
+import sloga1 from "../assets/sloga1.jpg"
 
 function Players() {
   return (
     <div>
-      <Hero2Component />
+      <div>
+        <HeroPlayersComponent />
+        
+      </div>
+      
       Igraci
     </div>
   )
