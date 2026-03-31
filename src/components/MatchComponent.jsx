@@ -8,7 +8,7 @@ import boske from "../assets/boske.jpg"
 
 function MatchComponent() {
 
-    const matchDate = new Date("2026-03-30T19:00:00");
+    const matchDate = new Date("2026-04-07T19:00:00");
 
 const [timeLeft, setTimeLeft] = useState({});
 
@@ -42,15 +42,15 @@ useEffect(() => {
         <img 
           src={duca} 
           alt="duca" 
-          className="hidden md:block h-[300px] object-cover rounded-xl ml-16"
+          className="hidden md:block h-[300px] object-cover rounded-xl ml-16 border-10 border-"
         />
 
         {/* SREDINA - KARTICE */}
         <div className="flex flex-col gap-8">
 
           {/* SLJEDEĆA UTAKMICA */}
-          <div className="bg-black/20 drop-blur-md p-6 rounded-2xl text-center shadow-lg">
-            <h2 className="text-xl font-bold mb-4 text-red-500">
+          <div className="bg-red-600  drop-blur-md p-6 rounded-2xl text-center shadow-lg border-6 border-black">
+            <h2 className="text-xl font-bold mb-4 text-gray-300">
               SLJEDEĆA UTAKMICA
             </h2>
 
@@ -58,14 +58,14 @@ useEffect(() => {
               SLOGA vs BORAC
             </p>
 
-            <p className="text-blue-400 mt-2">
-              25.03.2026 • 19:00
+            <p className="text-amber-300 mt-2">
+              07.04.2026 • 19:00
             </p>
           </div>
 
           {/* PRETHODNA UTAKMICA */}
-          <div className="bg-black/20 backdrop-blur-md p-6 rounded-2xl text-center shadow-lg">
-            <h2 className="text-xl font-bold mb-4 text-green-400">
+          <div className="bg-red-600 backdrop-blur-md p-6 rounded-2xl text-center shadow-lg border-6 border-black">
+            <h2 className="text-xl font-bold mb-4 text-gray-300">
               PRETHODNA UTAKMICA
             </h2>
 
@@ -73,31 +73,31 @@ useEffect(() => {
               SLOGA 28 : 25 IZVIĐAČ
             </p>
 
-            <p className="text-blue-400 mt-2">
+            <p className="text-amber-300 mt-2">
               18.03.2026
             </p>
           </div>
 
-          <div className="flex justify-center gap-6 mt-4">
+          <div className="flex justify-center gap-4 mt-6">
 
-            <div>
-                <p className="text-xl font-bold">{timeLeft.days || 0}</p>
-                <span className="text-sm text-gray-600">dana</span>
+            <div className="flex flex-col items-center bg-red-600 text-white p-4 rounded-2xl shadow-lg w-20 border-3 border-black">
+                <p className="text-3xl font-extrabold">{timeLeft.days || 0}</p>
+                <span className="text-sm">dana</span>
             </div>
 
-            <div>
-                <p className="text-xl font-bold">{timeLeft.hours || 0}</p>
-                <span className="text-sm text-gray-600">sati</span>
+            <div className="flex flex-col items-center bg-red-600 text-white p-4 rounded-2xl shadow-lg w-20 border-3 border-black">
+                <p className="text-3xl font-extrabold">{timeLeft.hours || 0}</p>
+                <span className="text-sm">sati</span>
             </div>
 
-            <div>
-                <p className="text-xl font-bold">{timeLeft.minutes || 0}</p>
-                <span className="text-sm text-gray-600">min</span>
+            <div className="flex flex-col items-center bg-red-600 text-white p-4 rounded-2xl shadow-lg w-20 border-3 border-black">
+              <p className="text-3xl font-extrabold">{timeLeft.minutes || 0}</p>
+              <span className="text-sm">min</span>
             </div>
 
-            <div>
-                <p className="text-xl font-bold">{timeLeft.seconds || 0}</p>
-                <span className="text-sm text-gray-600">sek</span>
+            <div className="flex flex-col items-center bg-red-600 text-white p-4 rounded-2xl shadow-lg w-20 border-3 border-black">
+              <p className="text-3xl font-extrabold">{timeLeft.seconds || 0}</p>
+              <span className="text-sm">sek</span>
             </div>
 
             </div>
@@ -108,7 +108,7 @@ useEffect(() => {
         <img 
           src={boske} 
           alt="boske" 
-          className="hidden md:block h-[300px] object-cover rounded-xl ml-21"
+          className="hidden md:block h-[300px] object-cover rounded-xl ml-21 border-10 border-red-600"
         />
         
         
