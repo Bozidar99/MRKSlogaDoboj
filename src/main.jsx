@@ -12,6 +12,9 @@ import Contact from "./pages/Contact.jsx"
 import Galery from "./pages/Galery.jsx"
 import News from "./pages/News.jsx"
 import Players from "./pages/Players.jsx"
+//redux
+import { Provider } from 'react-redux'
+import { store } from './store/index.js'
 
 const router = createBrowserRouter([
   //app router
@@ -51,6 +54,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 )
