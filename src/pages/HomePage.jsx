@@ -12,7 +12,7 @@ function HomePage() {
           <MatchComponent/>
           <NewsComponent/>
           <TrophyComponent/>
-          <FooterComponent/>
+          
 
     </div>
   )
