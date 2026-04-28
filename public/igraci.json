@@ -1,0 +1,37 @@
+{
+  "igraci": {
+    "golmani": [
+      { "ime": "Đorđe Bosić", "br": 32, "pozicija": "golman", "slika": "https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo0ibYDTGKTd8fPJNNbrXg8ZSnn9Ki9JkMLRLeGZAbdMDY" },
+      { "ime": "Božidar Bajoivć", "br": 99, "pozicija": "golman", "slika": "https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo0wta0dDAekTiM7W6VyohFWv918vkekzexkmjmkthl43k"}
+    ],
+    "krila": [
+      { "ime": "Ivan Jakubović", "br": 6, "pozicija": "Lijevo krilo", "slika":"https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo063q2rQ_vLltmrNdZqLdlvi5fOJLucTJTZk0z9Q7QQkQ"},
+      { "ime": "Vukašin Maljenović", "br": 5, "pozicija": "Lijevo krilo", "slika": "https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo063q2rQ_vLltmrNdZqLdlvh2eGLPR2W1eR68GA4XDilA"},
+      { "ime": "Andrej Paripović", "br": 8, "pozicija": "Desno krilo", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/1533.png"},
+      { "ime": "Filip Stojanović", "br": 14, "pozicija": "Lijevo krilo", "slika": "https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo0wMml0cPqj_-2Gyy-FRkMGU69UfVu7xUBtmW2phAjE5Q"},
+      { "ime": "Vukašin Zekić", "br": 18, "pozicija": "Desno krilo", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/1419.png"},
+      { "ime": "Aleksej Đekić", "br": 7, "pozicija": "Desno krilo", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/1185.png"},
+      { "ime": "Rajko Maričić", "br": 10, "pozicija": "Lijevo krilo", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/208.png"}
+    ],
+    "bekovi": [
+      { "ime": "Dušan Miličević", "br": 13, "pozicija": "Srednji bek", "slika": "src/assets/duca.jpg" },
+      { "ime": "Todor Milisavljević", "br": 11, "pozicija": "Srednji bek", "slika": "https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo07egu9YNWkxIrqst3ZXY8WazD5NIYk3Qs9Db3y4A7Xg4"},
+      { "ime": "Boris Bosić", "br": 22, "pozicija": "Srednji bek", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/166.png"},
+      { "ime": "Dario Đenadija", "br": 9, "pozicija": "Lijevi bek", "slika": "https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo0jBIrPa-Rnl4F-v9N7NdTk21A79NrC5LCAxVFKbKFpz4"},
+      { "ime": "Miloš Čekić", "br": 17, "pozicija": "Desni bek", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/490.png"},
+      { "ime": "Antonio Nikoloski", "br": 19, "pozicija": "Lijevi bek", "slika":"https://rsbih.ba/wp-content/uploads/Registracije/1626.png"}
+    ],
+    "pivoti": [
+      { "ime": "Aleksandar Vasiljević", "br": 20, "pozicija": "Pivot", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/1625.png"},
+      { "ime": "Nikola Đurić", "br": 33, "pozicija": "Pivot", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/199.png"},
+      { "ime": "Aleksa Sarkić", "br": 15, "pozicija": "Pivot", "slika": "https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo063q2rQ_vLltmrNdZqLdlvrlLr7WYABLM9b830flJurE"},
+      { "ime": "Radomir Stojanović", "br": 3, "pozicija": "Pivot", "slika":"https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo0jBIrPa-Rnl4F-v9N7NdTk7krvMaX4KkSu5b4CBsa3o4"}
+    ],
+    "treneri": [
+      { "ime": "Milutin Bogdanović", "pozicija": "Trener", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/212.png"},
+      { "ime": "Srđan Pavilović", "pozicija": "Kondicioni trener", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/1187.png"},
+      { "ime": "Siniša Simić", "pozicija": "Ekonom", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/1531.png"},
+      { "ime": "Vojislav Rađa", "pozicija": "Službeni predstavnik", "slika": "https://rsbih.ba/wp-content/uploads/Registracije/215.png"}
+    ]
+  }
+}

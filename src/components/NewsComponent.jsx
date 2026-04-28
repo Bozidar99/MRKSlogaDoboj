@@ -86,6 +86,7 @@ function NewsComponent() {
           {/* KARTICA */}
           <div className="bg-white rounded-2xl shadow-md border-2 border-gray-200 overflow-hidden min-h-[220px] flex flex-col transition-all duration-300">
             <div className="p-5 md:p-6 flex flex-col flex-1">
+             
               <p className="text-xs text-red-500 font-semibold mb-1">{vijest.datum}</p>
               <h3 className="text-base md:text-lg font-bold text-black mb-3 leading-snug">
                 {vijest.naslov}

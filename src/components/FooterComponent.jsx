@@ -1,7 +1,16 @@
 import React from 'react'
 import logofooter from "../assets/logofooter.png"
-
+import { NavLink } from "react-router-dom"
 function FooterComponent() {
+
+  const navLinks = [
+    { to: "/",        label: "Home" },
+    { to: "/about",   label: "O nama" },
+    { to: "/players", label: "Igrači" },
+    { to: "/news",    label: "Vijesti" },
+    { to: "/galery",  label: "Galerija" },
+    { to: "/contact", label: "Kontakt" },
+  ]
   return (
     <footer className="relative text-gray-300 bg-[#0b0f19]">
 
@@ -44,12 +53,19 @@ function FooterComponent() {
             Klub
           </h3>
           <ul className="space-y-2 text-sm text-gray-400">
-            <li><a className="hover:text-white">Početna</a></li>
-            <li><a className="hover:text-white">Tim</a></li>
-            <li><a className="hover:text-white">Utakmice</a></li>
-            <li><a className="hover:text-white">Vijesti</a></li>
-            <li><a className="hover:text-white">Galerija</a></li>
-          </ul>
+          {navLinks.map((link) => (
+            <li key={link.to}>
+              <NavLink
+                to={link.to}
+                className={({ isActive }) =>
+                  isActive ? "text-red-500 font-bold" : "hover:text-white transition"
+                }
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
         </div>
 
         {/* KONTAKT */}
