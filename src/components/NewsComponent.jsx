@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import duca from "../assets/duca.jpg"
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchVijesti, fetchIgracUtakmice } from '../store/newsSlice'
+import { FaStar } from 'react-icons/fa'
 
 function NewsComponent() {
   const dispatch = useDispatch()
@@ -71,11 +71,9 @@ function NewsComponent() {
               <span className="text-white font-bold text-sm uppercase tracking-widest">⭐ Igrač utakmice</span>
             </div>
             <div className="flex flex-col items-center p-5 flex-1">
-              <img
-                src={duca}
-                alt="Igrač utakmice"
-                className="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-4 border-red-600 shadow-lg mb-4"
-              />
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-red-600 shadow-lg mb-4 bg-black flex items-center justify-center">
+                <FaStar className="text-red-600" size={56} />
+              </div>
               <h3 className="text-xl font-extrabold text-black">{igracUtakmice?.ime}</h3>
               <div className="flex items-center gap-2 mt-2 mb-3">
                 <span className="bg-red-600 text-white font-extrabold text-2xl px-4 py-1 rounded-xl shadow">

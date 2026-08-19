@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchVijesti } from '../store/newsSlice'
 
 
-const kategorije = ["Sve", "Rezultat", "Pobjeda", "Derbi", "Intervju", "Kup", "Omladinska"]
+const kategorije = ["Sve", "Rezultat", "Pobjeda", "Derbi", "Intervju", "Kup", "Omladinska", "Transfer", "Ostalo"]
 
 const boje = {
   "Rezultat":   "bg-blue-100 text-blue-700",
@@ -12,6 +12,8 @@ const boje = {
   "Intervju":   "bg-purple-100 text-purple-700",
   "Kup":        "bg-yellow-100 text-yellow-700",
   "Omladinska": "bg-orange-100 text-orange-700",
+  "Transfer":   "bg-pink-100 text-pink-700",
+  "Ostalo":     "bg-gray-100 text-gray-700",
 }
 
 function News() {

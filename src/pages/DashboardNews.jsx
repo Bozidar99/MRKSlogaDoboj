@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchVijesti, dodajVijest, obrisiVijest, urediVijest } from '../store/newsSlice'
+import { fetchVijesti, dodajVijest, obrisiVijest, urediVijest, fetchIgracUtakmice, postaviIgracaUtakmice } from '../store/newsSlice'
 import { FaTrash, FaEdit, FaPlus, FaTimes } from 'react-icons/fa'
 
 const kategorije = ["Rezultat", "Pobjeda", "Derbi", "Intervju", "Kup", "Omladinska"]
@@ -17,14 +17,27 @@ const initialForma = {
 
 function DashboardNews() {
   const dispatch = useDispatch()
-  const { vijesti, loading, saving } = useSelector((state) => state.news)
+  const { vijesti, igracUtakmice, loading, saving } = useSelector((state) => state.news)
   const [showForma, setShowForma]   = useState(false)
   const [editId, setEditId]         = useState(null)
   const [forma, setForma]           = useState(initialForma)
+  const [showIgracForma, setShowIgracForma] = useState(false)
+  const [igracForma, setIgracForma] = useState({ ime: '', golova: 0, utakmica: '', datum: '', opis: '' })
 
   useEffect(() => {
     dispatch(fetchVijesti())
+    dispatch(fetchIgracUtakmice())
   }, [dispatch])
+
+  useEffect(() => {
+    if (igracUtakmice) setIgracForma(igracUtakmice)
+  }, [igracUtakmice])
+
+  function handleIgracSubmit(e) {
+    e.preventDefault()
+    dispatch(postaviIgracaUtakmice(igracForma))
+    setShowIgracForma(false)
+  }
 
   function handleDodaj(e) {
     e.preventDefault()
@@ -76,6 +89,87 @@ function DashboardNews() {
 
   return (
     <div>
+      {/* IGRAČ UTAKMICE */}
+      <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-6 mb-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-extrabold text-black">⭐ Igrač utakmice</h3>
+          <button
+            onClick={() => setShowIgracForma(!showIgracForma)}
+            className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-gray-800 transition"
+          >
+            {showIgracForma ? "Zatvori" : "Uredi"}
+          </button>
+        </div>
+
+        {!showIgracForma ? (
+          <div className="text-sm text-gray-600">
+            <p><span className="font-bold text-black">{igracForma.ime}</span> — {igracForma.golova} golova</p>
+            <p className="text-gray-400 text-xs mt-1">{igracForma.utakmica} • {igracForma.datum}</p>
+          </div>
+        ) : (
+          <form onSubmit={handleIgracSubmit} className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1 block">Ime igrača</label>
+                <input
+                  required
+                  type="text"
+                  value={igracForma.ime}
+                  onChange={(e) => setIgracForma({ ...igracForma, ime: e.target.value })}
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1 block">Broj golova</label>
+                <input
+                  required
+                  type="number"
+                  value={igracForma.golova}
+                  onChange={(e) => setIgracForma({ ...igracForma, golova: Number(e.target.value) })}
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+                />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1 block">Utakmica</label>
+                <input
+                  type="text"
+                  placeholder="npr. Sloga 29 : 28 Borac"
+                  value={igracForma.utakmica}
+                  onChange={(e) => setIgracForma({ ...igracForma, utakmica: e.target.value })}
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+                />
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-gray-500 mb-1 block">Datum</label>
+                <input
+                  type="text"
+                  placeholder="DD.MM.GGGG"
+                  value={igracForma.datum}
+                  onChange={(e) => setIgracForma({ ...igracForma, datum: e.target.value })}
+                  className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+                />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">Kratak opis / citat</label>
+              <textarea
+                rows={2}
+                value={igracForma.opis}
+                onChange={(e) => setIgracForma({ ...igracForma, opis: e.target.value })}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-red-600 resize-none"
+              />
+            </div>
+            <div>
+              <button type="submit" className="bg-red-600 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-red-700 transition">
+                Sačuvaj
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
+
       {/* HEADER */}
       <div className="flex items-center justify-between mb-2">
         <h2 className="text-2xl font-extrabold text-black">Vijesti</h2>
