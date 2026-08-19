@@ -42,13 +42,21 @@ export const postaviPrethodnu = createAsyncThunk('match/postaviPrethodnu', async
 
 // ── AŽURIRAJ CIJELU TABELU LIGE ─────────────────────
 export const sacuvajTabelu = createAsyncThunk('match/sacuvajTabelu', async (redovi) => {
-  // redovi = [{id?, pos, tim, u, p, r, g, bod, highlight}, ...]
-  const { data, error } = await supabase
-    .from('league_table')
-    .upsert(redovi)
-    .select()
-  if (error) throw error
-  return data
+  // Ažuriramo svaki red pojedinačno po id-ju (izbjegava sukob sa auto-generisanom id kolonom)
+  const rezultati = await Promise.all(
+    redovi.map(async (red) => {
+      const { id, ...rest } = red
+      const { data, error } = await supabase
+        .from('league_table')
+        .update(rest)
+        .eq('id', id)
+        .select()
+        .single()
+      if (error) throw error
+      return data
+    })
+  )
+  return rezultati
 })
 
 const matchSlice = createSlice({

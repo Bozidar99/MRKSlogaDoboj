@@ -20,11 +20,21 @@ export const fetchIgraci = createAsyncThunk('players/fetchIgraci', async () => {
   }
 })
 
-// ── DODAJ IGRAČA ─────────────────────────────────────
-export const dodajIgraca = createAsyncThunk('players/dodajIgraca', async ({ kljuc, igrac }) => {
+// ── DODAJ IGRAČA (sa opcionim upload-om slike) ──────
+export const dodajIgraca = createAsyncThunk('players/dodajIgraca', async ({ kljuc, igrac, slikaFile }) => {
+  let slikaUrl = igrac.slika || ''
+
+  if (slikaFile) {
+    const fileName = `players/${Date.now()}-${slikaFile.name}`
+    const { error: uploadError } = await supabase.storage.from('gallery').upload(fileName, slikaFile)
+    if (uploadError) throw uploadError
+    const { data: urlData } = supabase.storage.from('gallery').getPublicUrl(fileName)
+    slikaUrl = urlData.publicUrl
+  }
+
   const { data, error } = await supabase
     .from('players')
-    .insert([{ ...igrac, kategorija: kljuc }])
+    .insert([{ ...igrac, slika: slikaUrl, kategorija: kljuc }])
     .select()
     .single()
   if (error) throw error
@@ -49,6 +59,34 @@ export const obrisiIgraca = createAsyncThunk('players/obrisiIgraca', async ({ kl
   const { error } = await supabase.from('players').delete().eq('id', id)
   if (error) throw error
   return { kljuc, id }
+})
+
+// ── DODAJ TRENERA / ČLANA STRUČNOG ŠTABA ────────────
+export const dodajTrenera = createAsyncThunk('players/dodajTrenera', async ({ trener, slikaFile }) => {
+  let slikaUrl = trener.slika || ''
+
+  if (slikaFile) {
+    const fileName = `coaches/${Date.now()}-${slikaFile.name}`
+    const { error: uploadError } = await supabase.storage.from('gallery').upload(fileName, slikaFile)
+    if (uploadError) throw uploadError
+    const { data: urlData } = supabase.storage.from('gallery').getPublicUrl(fileName)
+    slikaUrl = urlData.publicUrl
+  }
+
+  const { data, error } = await supabase
+    .from('coaches')
+    .insert([{ ...trener, slika: slikaUrl }])
+    .select()
+    .single()
+  if (error) throw error
+  return data
+})
+
+// ── OBRIŠI TRENERA ───────────────────────────────────
+export const obrisiTrenera = createAsyncThunk('players/obrisiTrenera', async (id) => {
+  const { error } = await supabase.from('coaches').delete().eq('id', id)
+  if (error) throw error
+  return id
 })
 
 const playersSlice = createSlice({
@@ -93,6 +131,14 @@ const playersSlice = createSlice({
 
       .addCase(obrisiIgraca.fulfilled, (state, action) => {
         state[action.payload.kljuc] = state[action.payload.kljuc].filter(p => p.id !== action.payload.id)
+      })
+
+      .addCase(dodajTrenera.fulfilled, (state, action) => {
+        state.treneri.push(action.payload)
+      })
+
+      .addCase(obrisiTrenera.fulfilled, (state, action) => {
+        state.treneri = state.treneri.filter(t => t.id !== action.payload)
       })
   }
 })

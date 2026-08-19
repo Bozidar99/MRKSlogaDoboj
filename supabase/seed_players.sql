@@ -16,7 +16,7 @@ insert into players (ime, br, pozicija, kategorija, slika) values ('Adriano Ćor
 insert into players (ime, br, pozicija, kategorija, slika) values ('Nikola Đurić', 3, 'Pivot', 'pivoti', 'https://rsbih.ba/wp-content/uploads/Registracije/199.png');
 insert into players (ime, br, pozicija, kategorija, slika) values ('Aleksa Sarkić', 15, 'Pivot', 'pivoti', 'https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo063q2rQ_vLltmrNdZqLdlvrlLr7WYABLM9b830flJurE');
 insert into players (ime, br, pozicija, kategorija, slika) values ('Radomir Stojanović', 33, 'Pivot', 'pivoti', 'https://res.ehf.eu/doxtore/TLCEQLGQDD/E6dJQfOvIeeNLqJ52Xmi63K-jtIN8kf5q9wdbm68Z_6RtfTtcYjvl46DhA6CVYo0jBIrPa-Rnl4F-v9N7NdTk7krvMaX4KkSu5b4CBsa3o4');
-insert into players (ime, br, pozicija, kategorija, slika) values ('Milutin Bogdanović', 1, 'golman', 'golmani', 'https://www.instagram.com/p/Db-8F9foGJE/');
+insert into players (ime, br, pozicija, kategorija, slika) values ('Milutin Bogdanović', 1, 'golman', 'golmani', 'https://rsbih.ba/wp-content/uploads/Registracije/212.png');
 insert into coaches (ime, pozicija, slika) values ('Srđan Pavilović', 'Kondicioni trener', 'https://rsbih.ba/wp-content/uploads/Registracije/1187.png');
 insert into coaches (ime, pozicija, slika) values ('Miljan Stanić', 'Trener', 'https://rsbih.ba/wp-content/uploads/Registracije/1531.png');
 insert into coaches (ime, pozicija, slika) values ('Vojislav Rađa', 'Službeni predstavnik', 'https://rsbih.ba/wp-content/uploads/Registracije/215.png');

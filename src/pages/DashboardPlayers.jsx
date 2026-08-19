@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchIgraci, obrisiIgraca, dodajIgraca } from '../store/playersSlice'
+import { fetchIgraci, obrisiIgraca, dodajIgraca, dodajTrenera, obrisiTrenera } from '../store/playersSlice'
 import { FaTrash, FaPlus } from 'react-icons/fa'
 
 const sekcije = [
@@ -11,12 +11,17 @@ const sekcije = [
 ]
 
 const initialForma = { ime: "", br: "", pozicija: "", kljuc: "golmani" }
+const initialTrenerForma = { ime: "", pozicija: "" }
 
 function DashboardPlayers() {
   const dispatch = useDispatch()
   const { golmani, krila, bekovi, pivoti, treneri, loading, saving } = useSelector((state) => state.players)
   const [forma, setForma] = useState(initialForma)
+  const [slikaFile, setSlikaFile] = useState(null)
   const [showForma, setShowForma] = useState(false)
+  const [trenerForma, setTrenerForma] = useState(initialTrenerForma)
+  const [trenerSlikaFile, setTrenerSlikaFile] = useState(null)
+  const [showTrenerForma, setShowTrenerForma] = useState(false)
 
   useEffect(() => {
     dispatch(fetchIgraci())
@@ -31,15 +36,33 @@ function DashboardPlayers() {
     e.preventDefault()
     dispatch(dodajIgraca({
       kljuc: forma.kljuc,
-      igrac: { ime: forma.ime, br: Number(forma.br), pozicija: forma.pozicija }
+      igrac: { ime: forma.ime, br: Number(forma.br), pozicija: forma.pozicija },
+      slikaFile,
     }))
     setForma(initialForma)
+    setSlikaFile(null)
+    e.target.reset()
     setShowForma(false)
   }
 
   function handleObrisi(kljuc, id) {
     if (window.confirm("Da li ste sigurni da želite obrisati igrača?")) {
       dispatch(obrisiIgraca({ kljuc, id }))
+    }
+  }
+
+  function handleDodajTrenera(e) {
+    e.preventDefault()
+    dispatch(dodajTrenera({ trener: trenerForma, slikaFile: trenerSlikaFile }))
+    setTrenerForma(initialTrenerForma)
+    setTrenerSlikaFile(null)
+    e.target.reset()
+    setShowTrenerForma(false)
+  }
+
+  function handleObrisiTrenera(id) {
+    if (window.confirm("Da li ste sigurni da želite obrisati člana stručnog štaba?")) {
+      dispatch(obrisiTrenera(id))
     }
   }
 
@@ -106,6 +129,15 @@ function DashboardPlayers() {
                   <option key={s.kljuc} value={s.kljuc}>{s.naziv}</option>
                 ))}
               </select>
+            </div>
+            <div className="sm:col-span-2 lg:col-span-4">
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">Slika igrača (opciono)</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setSlikaFile(e.target.files[0])}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm"
+              />
             </div>
             <div className="sm:col-span-2 lg:col-span-4 flex gap-3">
               <button
@@ -174,16 +206,69 @@ function DashboardPlayers() {
 
       {/* TRENERI */}
       <div className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
-        <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-100">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <span className="text-white text-xs font-bold px-3 py-1 rounded-full bg-red-600">
             Stručni štab
           </span>
+          <button
+            onClick={() => setShowTrenerForma(!showTrenerForma)}
+            className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-red-700 transition"
+          >
+            <FaPlus size={12} />
+            Dodaj člana štaba
+          </button>
         </div>
+
+        {showTrenerForma && (
+          <form onSubmit={handleDodajTrenera} className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-6 border-b border-gray-100 bg-gray-50">
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">Ime i prezime</label>
+              <input
+                required
+                type="text"
+                placeholder="Ime..."
+                value={trenerForma.ime}
+                onChange={(e) => setTrenerForma({ ...trenerForma, ime: e.target.value })}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">Uloga</label>
+              <input
+                required
+                type="text"
+                placeholder="npr. Trener, Kondicioni trener..."
+                value={trenerForma.pozicija}
+                onChange={(e) => setTrenerForma({ ...trenerForma, pozicija: e.target.value })}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-red-600"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-semibold text-gray-500 mb-1 block">Slika (opciono)</label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setTrenerSlikaFile(e.target.files[0])}
+                className="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm"
+              />
+            </div>
+            <div className="sm:col-span-3 flex gap-3">
+              <button type="submit" className="bg-red-600 text-white px-6 py-2 rounded-xl text-sm font-bold hover:bg-red-700 transition">
+                Sačuvaj
+              </button>
+              <button type="button" onClick={() => setShowTrenerForma(false)} className="bg-gray-100 text-gray-600 px-6 py-2 rounded-xl text-sm font-bold hover:bg-gray-200 transition">
+                Otkaži
+              </button>
+            </div>
+          </form>
+        )}
+
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-gray-50 text-gray-400 text-xs uppercase">
               <th className="px-6 py-3 text-left">Ime</th>
               <th className="px-6 py-3 text-left">Uloga</th>
+              <th className="px-6 py-3 text-left">Obriši</th>
             </tr>
           </thead>
           <tbody>
@@ -191,6 +276,14 @@ function DashboardPlayers() {
               <tr key={trener.id} className="border-t border-gray-100 hover:bg-gray-50 transition">
                 <td className="px-6 py-3 font-semibold text-black">{trener.ime}</td>
                 <td className="px-6 py-3 text-gray-400">{trener.pozicija}</td>
+                <td className="px-6 py-3">
+                  <button
+                    onClick={() => handleObrisiTrenera(trener.id)}
+                    className="text-red-500 hover:text-red-700 transition"
+                  >
+                    <FaTrash size={14} />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
