@@ -1,118 +1,95 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { supabase } from '../lib/supabaseClient'
 
-const initialState = {
-  vijesti: [
-    {
-      id: 1,
-      naslov: "Sloga remizirala sa Krivajom",
-      kratko: "U 24. kolu Premijer lige BiH, Sloga je remizirala sa Krivajom rezultatom 31:31.",
-      sadrzaj: "U 24. kolu Premijer lige BiH, Sloga je remizirala sa Krivajom rezultatom 31:31. Uprkos remiju, Sloga ostaje na trećem mjestu tabele sa 33 boda i nastavlja borbu za evropsku poziciju.",
-      datum: "27.04.2026",
-      kategorija: "Rezultat",
-      url: "https://sportdc.net/n/175986/sloga-remizirala-sa-krivajom",
-      slika: "https://sportdc.net/img/newsphoto/175986/800"
-    },
-    {
-      id: 2,
-      naslov: "Peta uzastopna pobjeda Sloge",
-      kratko: "Rukometaši Sloge ostvarili su petu uzastopnu pobjedu i učvrstili poziciju u vrhu tabele.",
-      sadrzaj: "Rukometaši Sloge ostvarili su petu uzastopnu pobjedu i učvrstili poziciju u vrhu tabele Premijer lige BiH. Sjajan niz rezultata svrstava ih među favorite za evropsku poziciju.",
-      datum: "24.04.2026",
-      kategorija: "Pobjeda",
-      url: "https://sportdc.net/n/175861/peta-uzastopna-pobjeda-sloge",
-      slika: "https://sportdc.net/img/newsphoto/175861/800"
-    },
-    {
-      id: 3,
-      naslov: "Sloga u dramatičnoj utakmici bolja od Borca",
-      kratko: "MRK Sloga Doboj slavila je u 22. kolu Premijer lige BiH protiv Borac M:TEL rezultatom 29:28.",
-      sadrzaj: "U jednoj od najdramatičnijih utakmica sezone, Sloga je na svom terenu savladala Borac M:TEL minimalnim rezultatom 29:28. Utakmica je bila neizvjesna do posljednje sekunde.",
-      datum: "11.04.2026",
-      kategorija: "Derbi",
-      url: "https://sportdc.net/n/175711/sloga-u-dramaticnoj-utakmici-bolja-od-borca",
-      slika: "https://sportdc.net/img/newsphoto/175711/800"
-    },
-    {
-      id: 4,
-      naslov: "Srđan Pavlović: Sloga spremna za derbi protiv Borca",
-      kratko: "Trener Sloge uoči derbija poručio da je tim u odličnoj formi i spreman za najveći izazov sezone.",
-      sadrzaj: "Trener MRK Sloga Doboj Srđan Pavlović izjavio je uoči derbija sa Borcem da su igrači maksimalno motivisani i fizički spremni.",
-      datum: "11.04.2026",
-      kategorija: "Intervju",
-      url: "https://sportdc.net/n/175689/srdjan-pavlovic-sloga-spremna-za-derbi-protiv-borca",
-      slika: "https://sportdc.net/img/newsphoto/175689/800"
-    },
-    {
-      id: 5,
-      naslov: "Sloga na evropskom putu, pobjeda u Vogošći",
-      kratko: "Sloga je slavila u gostima kod Vogošće i nastavila niz dobrih rezultata u drugom dijelu sezone.",
-      sadrzaj: "MRK Sloga Doboj ostvarila je važnu pobjedu u gostima, savladavši domaći tim Vogošće rezultatom 34:32.",
-      datum: "04.04.2026",
-      kategorija: "Pobjeda",
-      url: "https://sportdc.net/n/175557/sloga-na-evropskom-putu-pobjeda-u-vogosci",
-      slika: "https://sportdc.net/img/newsphoto/175557/800"
-    },
-    {
-      id: 6,
-      naslov: "Kup BiH: Sloga protiv Slobode u polufinalu",
-      kratko: "Izvučen je žrijeb za polufinale Kupa Bosne i Hercegovine — Sloga se sastaje sa Slobodom iz Tuzle.",
-      sadrzaj: "Rukometaši MRK Sloga Doboj dočekuju Slobodu iz Tuzle u polufinalu Kupa Bosne i Hercegovine.",
-      datum: "05.04.2026",
-      kategorija: "Kup",
-      url: "https://sportdc.net/n/175796/kup-bosne-i-hercegovine-sloga-protiv-slobode-leotar-protiv-izvidjaca",
-      slika: "https://sportdc.net/img/newsphoto/175796/800"
-    },
-    {
-      id: 7,
-      naslov: "Slogini dječaci 2013. godišta i mlađi bez poraza",
-      kratko: "Mlađe kategorije MRK Sloga Doboj nastavljaju sjajan niz — pioniri godišta 2013. i mlađi još uvijek neporaženi.",
-      sadrzaj: "Podmladak MRK Sloga Doboj nastavlja s izvrsnim rezultatima. Pioniri godišta 2013. i mlađi odigrali su odličnu sezonu bez ijednog poraza.",
-      datum: "28.03.2026",
-      kategorija: "Omladinska",
-      url: "https://sportdc.net/n/175583/slogini-djecaci-2013-godiste-i-mladji-bez-poraza",
-      slika: "https://sportdc.net/img/newsphoto/175583/800"
-    },
-    {
-      id: 8,
-      naslov: "Sloga savladala Maglaja",
-      kratko: "Rukometaši Sloge porazili su ekipu Maglaja rezultatom 27:24.",
-      sadrzaj: "Rukometaši Sloge porazili su ekipu Maglaja rezultatom 27:24. Sjajni golman Đorđe Bosić sakupio je 17 odbrana od toga jedan sedmerac.",
-      datum: "28.03.2026",
-      kategorija: "Rezultat",
-      url: "https://sportdc.net/n/175398/sloga-savladala-maglaja",
-      slika: "https://sportdc.net/img/newsphoto/175398/800"
-    },
-  ],
-  igracUtakmice: {
-    ime: "Dušan Vasić",
-    golova: 9,
-    utakmica: "Sloga 29 : 28 Borac M:TEL",
-    datum: "22.04.2026",
-    opis: "Dušan je bio heroj večeri u dramatičnoj pobjedi nad Borcem, pogodivši odlučujući gol u završnici."
-  },
-  loading: false,
-  error: null,
-}
+// ── UČITAJ SVE VIJESTI ──────────────────────────────
+export const fetchVijesti = createAsyncThunk('news/fetchVijesti', async () => {
+  const { data, error } = await supabase
+    .from('news')
+    .select('*')
+    .order('datum', { ascending: false })
+  if (error) throw error
+  return data
+})
+
+// ── UČITAJ IGRAČA UTAKMICE ──────────────────────────
+export const fetchIgracUtakmice = createAsyncThunk('news/fetchIgracUtakmice', async () => {
+  const { data, error } = await supabase
+    .from('igrac_utakmice')
+    .select('*')
+    .eq('id', 1)
+    .single()
+  if (error) throw error
+  return data
+})
+
+// ── DODAJ VIJEST ─────────────────────────────────────
+export const dodajVijest = createAsyncThunk('news/dodajVijest', async (vijest) => {
+  const { id, ...rest } = vijest
+  const { data, error } = await supabase.from('news').insert([rest]).select().single()
+  if (error) throw error
+  return data
+})
+
+// ── UREDI VIJEST ─────────────────────────────────────
+export const urediVijest = createAsyncThunk('news/urediVijest', async (vijest) => {
+  const { id, ...rest } = vijest
+  const { data, error } = await supabase.from('news').update(rest).eq('id', id).select().single()
+  if (error) throw error
+  return data
+})
+
+// ── OBRIŠI VIJEST ────────────────────────────────────
+export const obrisiVijest = createAsyncThunk('news/obrisiVijest', async (id) => {
+  const { error } = await supabase.from('news').delete().eq('id', id)
+  if (error) throw error
+  return id
+})
+
+// ── POSTAVI IGRAČA UTAKMICE ─────────────────────────
+export const postaviIgracaUtakmice = createAsyncThunk('news/postaviIgracaUtakmice', async (igrac) => {
+  const { data, error } = await supabase
+    .from('igrac_utakmice')
+    .update(igrac)
+    .eq('id', 1)
+    .select()
+    .single()
+  if (error) throw error
+  return data
+})
 
 const newsSlice = createSlice({
   name: 'news',
-  initialState,
-  reducers: {
-    dodajVijest: (state, action) => {
-      state.vijesti.unshift(action.payload)
-    },
-    obrisiVijest: (state, action) => {
-      state.vijesti = state.vijesti.filter(v => v.id !== action.payload)
-    },
-    urediVijest: (state, action) => {
-      const index = state.vijesti.findIndex(v => v.id === action.payload.id)
-      if (index !== -1) state.vijesti[index] = action.payload
-    },
-    postaviIgracaUtakmice: (state, action) => {
-      state.igracUtakmice = action.payload
-    },
+  initialState: {
+    vijesti: [],
+    igracUtakmice: { ime: '', golova: 0, utakmica: '', datum: '', opis: '' },
+    loading: false,
+    saving: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchVijesti.pending, (state) => { state.loading = true; state.error = null })
+      .addCase(fetchVijesti.fulfilled, (state, action) => { state.loading = false; state.vijesti = action.payload })
+      .addCase(fetchVijesti.rejected, (state, action) => { state.loading = false; state.error = action.error.message })
+
+      .addCase(fetchIgracUtakmice.fulfilled, (state, action) => { state.igracUtakmice = action.payload })
+
+      .addCase(dodajVijest.pending, (state) => { state.saving = true })
+      .addCase(dodajVijest.fulfilled, (state, action) => { state.saving = false; state.vijesti.unshift(action.payload) })
+      .addCase(dodajVijest.rejected, (state, action) => { state.saving = false; state.error = action.error.message })
+
+      .addCase(urediVijest.fulfilled, (state, action) => {
+        const i = state.vijesti.findIndex(v => v.id === action.payload.id)
+        if (i !== -1) state.vijesti[i] = action.payload
+      })
+
+      .addCase(obrisiVijest.fulfilled, (state, action) => {
+        state.vijesti = state.vijesti.filter(v => v.id !== action.payload)
+      })
+
+      .addCase(postaviIgracaUtakmice.fulfilled, (state, action) => { state.igracUtakmice = action.payload })
   }
 })
 
-export const { dodajVijest, obrisiVijest, urediVijest, postaviIgracaUtakmice } = newsSlice.actions
 export default newsSlice.reducer

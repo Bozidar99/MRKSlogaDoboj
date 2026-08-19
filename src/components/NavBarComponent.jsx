@@ -3,6 +3,7 @@ import { useState } from "react"
 import { NavLink } from "react-router-dom"
 import logo from "../assets/logo.png"
 import { FaBars, FaTimes } from "react-icons/fa"
+import { RiAdminFill } from "react-icons/ri";
 
 function NavBarComponent() {
   const [toggleHeader, setToggleHeader] = useState(true)
@@ -15,6 +16,12 @@ function NavBarComponent() {
     { to: "/news",    label: "Vijesti" },
     { to: "/galery",  label: "Galerija" },
     { to: "/contact", label: "Kontakt" },
+    { to: "/login",   label: (
+          <div className="flex items-center gap-2">
+            <RiAdminFill size={25} color="black" />
+            <span>Log In</span>
+          </div>
+  ) },
   ]
 
   return (

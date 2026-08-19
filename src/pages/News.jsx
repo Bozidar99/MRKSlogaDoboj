@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchVijesti } from '../store/newsSlice'
 
 
 const kategorije = ["Sve", "Rezultat", "Pobjeda", "Derbi", "Intervju", "Kup", "Omladinska"]
@@ -14,9 +15,14 @@ const boje = {
 }
 
 function News() {
-  const { vijesti } = useSelector((state) => state.news)
+  const dispatch = useDispatch()
+  const { vijesti, loading } = useSelector((state) => state.news)
   const [aktivnaKat, setAktivnaKat] = useState("Sve")
   const [pretraga, setPretraga] = useState("")
+
+  useEffect(() => {
+    dispatch(fetchVijesti())
+  }, [dispatch])
 
   const filtrirane = vijesti.filter((v) => {
     const katOk = aktivnaKat === "Sve" || v.kategorija === aktivnaKat
@@ -77,7 +83,11 @@ function News() {
             </div>
           </div>
 
-          {filtrirane.length === 0 ? (
+          {loading ? (
+            <div className="flex justify-center py-20">
+              <div className="w-10 h-10 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
+            </div>
+          ) : filtrirane.length === 0 ? (
             <p className="text-center text-gray-400 py-20 text-lg">Nema vijesti za ovaj filter.</p>
           ) : (
             <>

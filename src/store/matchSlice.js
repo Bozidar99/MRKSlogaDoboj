@@ -1,32 +1,83 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { supabase } from '../lib/supabaseClient'
 
-const initialState = {
-  sljedeceUtakmice: [
-    { id: 1, domacin: "Sloga", gost: "Borac", datum: "10.05.2026", vrijeme: "19:00" }
-  ],
-  prethodnaUtakmica: {
-    domacin: "Sloga",
-    golDomacin: 29,
-    gost: "Borac M:TEL",
-    golGost: 28,
-    datum: "22.04.2026"
-  },
-  loading: false,
-  error: null,
-}
+// ── UČITAJ SLJEDEĆU + PRETHODNU UTAKMICU + TABELU ───
+export const fetchMatchData = createAsyncThunk('match/fetchMatchData', async () => {
+  const [matchesRes, tableRes] = await Promise.all([
+    supabase.from('matches').select('*'),
+    supabase.from('league_table').select('*').order('bod', { ascending: false }),
+  ])
+  if (matchesRes.error) throw matchesRes.error
+  if (tableRes.error) throw tableRes.error
+
+  const sljedeca = matchesRes.data.find(m => m.tip === 'sljedeca') || null
+  const prethodna = matchesRes.data.find(m => m.tip === 'prethodna') || null
+
+  return { sljedeca, prethodna, tabela: tableRes.data }
+})
+
+// ── AŽURIRAJ SLJEDEĆU UTAKMICU ──────────────────────
+export const postaviSljedecu = createAsyncThunk('match/postaviSljedecu', async (podaci) => {
+  const { data, error } = await supabase
+    .from('matches')
+    .update(podaci)
+    .eq('tip', 'sljedeca')
+    .select()
+    .single()
+  if (error) throw error
+  return data
+})
+
+// ── AŽURIRAJ PRETHODNU UTAKMICU ─────────────────────
+export const postaviPrethodnu = createAsyncThunk('match/postaviPrethodnu', async (podaci) => {
+  const { data, error } = await supabase
+    .from('matches')
+    .update(podaci)
+    .eq('tip', 'prethodna')
+    .select()
+    .single()
+  if (error) throw error
+  return data
+})
+
+// ── AŽURIRAJ CIJELU TABELU LIGE ─────────────────────
+export const sacuvajTabelu = createAsyncThunk('match/sacuvajTabelu', async (redovi) => {
+  // redovi = [{id?, pos, tim, u, p, r, g, bod, highlight}, ...]
+  const { data, error } = await supabase
+    .from('league_table')
+    .upsert(redovi)
+    .select()
+  if (error) throw error
+  return data
+})
 
 const matchSlice = createSlice({
   name: 'match',
-  initialState,
-  reducers: {
-    postaviSljedecu: (state, action) => {
-      state.sljedeceUtakmice = action.payload
-    },
-    postaviPrethodnu: (state, action) => {
-      state.prethodnaUtakmica = action.payload
-    },
+  initialState: {
+    sljedeca: null,
+    prethodna: null,
+    tabela: [],
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchMatchData.pending, (state) => { state.loading = true; state.error = null })
+      .addCase(fetchMatchData.fulfilled, (state, action) => {
+        state.loading = false
+        state.sljedeca = action.payload.sljedeca
+        state.prethodna = action.payload.prethodna
+        state.tabela = action.payload.tabela
+      })
+      .addCase(fetchMatchData.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
+      })
+      .addCase(postaviSljedecu.fulfilled, (state, action) => { state.sljedeca = action.payload })
+      .addCase(postaviPrethodnu.fulfilled, (state, action) => { state.prethodna = action.payload })
+      .addCase(sacuvajTabelu.fulfilled, (state, action) => { state.tabela = action.payload })
   }
 })
 
-export const { postaviSljedecu, postaviPrethodnu } = matchSlice.actions
 export default matchSlice.reducer
