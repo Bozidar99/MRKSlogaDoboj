@@ -25,14 +25,18 @@ function HeaderComponent({ setToggleHeader }) {
 
         {/* DRUŠTVENE MREŽE */}
         <div className='flex items-center gap-3'>
-          <FaFacebook className='text-white hover:text-red-500 cursor-pointer transition' size={22} />
-          <FaSquareInstagram className='text-white hover:text-red-500 cursor-pointer transition' size={22} />
+          <a href="https://www.facebook.com/rkslogadoboj/?locale=sr_RSs" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className='text-white hover:text-red-500 cursor-pointer transition' size={22} />
+          </a>
+          <a href="https://www.instagram.com/mrk_sloga.doboj/" target="_blank" rel="noopener noreferrer">
+            <FaSquareInstagram className='text-white hover:text-red-500 cursor-pointer transition' size={22} />
+          </a>
         </div>
 
         {/* EMAIL */}
         <div className='flex items-center gap-2'>
           <MdEmail className='text-white' size={22} />
-          <span className='text-white text-sm'>mrksloga@gmail.com</span>
+          <span className='text-white text-sm'>dobojrksloga@gmail.com</span>
         </div>
 
         {/* JEZIK */}

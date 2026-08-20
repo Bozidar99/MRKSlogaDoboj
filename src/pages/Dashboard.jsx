@@ -2,15 +2,16 @@ import React from 'react'
 import { Outlet, NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logoutAdmin } from '../store/authSlice'
-import { MdDashboard, MdNewspaper, MdSportsHandball, MdPhoto, MdLogout, MdSportsScore } from 'react-icons/md'
+import { MdDashboard, MdNewspaper, MdSportsHandball, MdPhoto, MdLogout, MdSportsScore, MdEmail } from 'react-icons/md'
 import logo from '../assets/logo.png'
 
 const sidebarLinks = [
-  { to: "/dashboard/home",    label: "Dashboard", ikona: <MdDashboard size={20} />      },
-  { to: "/dashboard/news",    label: "Vijesti",   ikona: <MdNewspaper size={20} />      },
-  { to: "/dashboard/players", label: "Igrači",    ikona: <MdSportsHandball size={20} /> },
-  { to: "/dashboard/match",   label: "Utakmice",  ikona: <MdSportsScore size={20} />    },
-  { to: "/dashboard/gallery", label: "Galerija",  ikona: <MdPhoto size={20} />          },
+  { to: "/dashboard/home",     label: "Dashboard", ikona: <MdDashboard size={20} />      },
+  { to: "/dashboard/news",     label: "Vijesti",   ikona: <MdNewspaper size={20} />      },
+  { to: "/dashboard/players",  label: "Igrači",    ikona: <MdSportsHandball size={20} /> },
+  { to: "/dashboard/match",    label: "Utakmice",  ikona: <MdSportsScore size={20} />    },
+  { to: "/dashboard/gallery",  label: "Galerija",  ikona: <MdPhoto size={20} />          },
+  { to: "/dashboard/messages", label: "Poruke",    ikona: <MdEmail size={20} />          },
 ]
 
 function Dashboard() {

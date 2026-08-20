@@ -2,7 +2,7 @@ import React from 'react'
 import tim from "../assets/tim.jpg"
 import ehf from "../assets/efh.jpg"
 import ehf1 from "../assets/efh1.jpg"
-import bht from "../assets/bht.png"
+import bht from "../assets/eurotaxi-logo.png"
 import hero from "../assets/hero.png"
 import hero2 from "../assets/hero2.png"
 

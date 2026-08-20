@@ -17,8 +17,8 @@ function IgracKartica({ igrac, boja, badge }) {
       className={`bg-white rounded-2xl shadow-md border-2 ${boja} hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden`}
     >
       {/* GORNJI DIO */}
-      <div className="bg-red-600 flex items-center justify-center pt-6 pb-4 relative min-h-[180px]">
-        <span className="text-white font-extrabold text-8xl opacity-10 absolute select-none">
+      <div className="bg-red-600 relative p-3">
+        <span className="text-white font-extrabold text-8xl opacity-10 absolute top-2 right-3 select-none z-0">
           {igrac.br}
         </span>
 
@@ -26,10 +26,11 @@ function IgracKartica({ igrac, boja, badge }) {
           <img
             src={igrac.slika}
             alt={igrac.ime}
-            className="w-32 h-32 object-cover rounded-full border-4 border-white shadow-xl z-10"
+            style={{ objectPosition: 'center 15%' }}
+            className="w-full h-64 object-cover rounded-xl border-4 border-white shadow-xl relative z-10"
           />
         ) : (
-          <div className="w-32 h-32 rounded-full border-4 border-white shadow-xl z-10 bg-red-700 flex items-center justify-center">
+          <div className="w-full h-64 rounded-xl border-4 border-white shadow-xl bg-red-700 flex items-center justify-center relative z-10">
             <span className="text-white font-extrabold text-3xl">
               #{igrac.br}
             </span>
@@ -58,16 +59,17 @@ function IgracKartica({ igrac, boja, badge }) {
 function TrenerKartica({ trener }) {
   return (
     <div className="bg-white rounded-2xl border-2 border-red-600 shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-      <div className="bg-red-600 flex items-center justify-center py-6 min-h-[160px]">
+      <div className="bg-red-600 p-3">
         {trener.slika ? (
           <img
             src={trener.slika}
             alt={trener.ime}
-            className="w-28 h-28 object-cover rounded-full border-4 border-white shadow-xl"
+            style={{ objectPosition: 'center 15%' }}
+            className="w-full h-64 object-cover rounded-xl border-4 border-white shadow-xl"
           />
         ) : (
-          <div className="w-28 h-28 rounded-full border-4 border-white shadow-xl bg-red-700 flex items-center justify-center">
-            <FaShieldAlt className="text-white" size={40} />
+          <div className="w-full h-64 rounded-xl border-4 border-white shadow-xl bg-red-700 flex items-center justify-center">
+            <FaShieldAlt className="text-white" size={60} />
           </div>
         )}
       </div>

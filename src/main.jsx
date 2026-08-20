@@ -19,6 +19,7 @@ import DashboardNews from "./pages/DashboardNews.jsx"
 import DashboardPlayers from "./pages/DashboardPlayers.jsx"
 import DashboardGallery from "./pages/DashboardGallery.jsx"
 import DashboardMatch from "./pages/DashboardMatch.jsx"
+import DashboardMessages from "./pages/DashboardMessages.jsx"
 import ProtectedRoute from "./components/ProtectedRoute.jsx"
 // redux
 import { Provider } from 'react-redux'
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
           { path: "players", element: <DashboardPlayers /> },
           { path: "match",   element: <DashboardMatch />   },
           { path: "gallery", element: <DashboardGallery /> },
+          { path: "messages", element: <DashboardMessages /> },
         ]
       }
     ]

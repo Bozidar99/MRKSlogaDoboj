@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import logofooter from "../assets/logofooter.png"
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md"
 import { FaFacebook, FaInstagram } from "react-icons/fa"
-import { useTranslation } from 'react-i18next'
+import { posaljiPoruku, resetSent } from '../store/messagesSlice'
 
 function Contact() {
-  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const { sending, sent, error } = useSelector((state) => state.messages)
   const [forma, setForma] = useState({ ime: '', email: '', poruka: '' })
-  const [poslano, setPoslano] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
-    // Ovdje će ići Axios poziv ka backendu kad bude spreman
-    setPoslano(true)
-    setForma({ ime: '', email: '', poruka: '' })
-    setTimeout(() => setPoslano(false), 4000)
+    dispatch(posaljiPoruku(forma)).then((result) => {
+      if (posaljiPoruku.fulfilled.match(result)) {
+        setForma({ ime: '', email: '', poruka: '' })
+        setTimeout(() => dispatch(resetSent()), 4000)
+      }
+    })
   }
 
   return (
@@ -65,7 +68,7 @@ function Contact() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-400 uppercase font-semibold">Email</p>
-                    <p className="text-black font-semibold">mrksloga@gmail.com</p>
+                    <p className="text-black font-semibold">dobojrksloga@gmail.com</p>
                   </div>
                 </div>
 
@@ -94,14 +97,14 @@ function Contact() {
               <div>
                 <p className="text-xs text-gray-400 uppercase font-semibold mb-3">Pratite nas</p>
                 <div className="flex gap-4">
-                  
-                    <a href="#"
+
+                  <a href="https://www.facebook.com/rkslogadoboj/?locale=sr_RS" target="_blank" rel="noopener noreferrer"
                     className="bg-red-600 p-3 rounded-xl hover:bg-red-700 transition"
                   >
                     <FaFacebook className="text-white" size={20} />
                   </a>
-                  
-                   <a href="#"
+
+                  <a href="https://www.instagram.com/mrk_sloga.doboj/" target="_blank" rel="noopener noreferrer"
                     className="bg-red-600 p-3 rounded-xl hover:bg-red-700 transition"
                   >
                     <FaInstagram className="text-white" size={20} />
@@ -115,9 +118,15 @@ function Contact() {
             <div className="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100">
               <h3 className="text-xl font-bold text-black mb-6">Pošaljite poruku</h3>
 
-              {poslano && (
+              {sent && (
                 <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl mb-6 text-sm font-semibold">
                   ✅ Poruka je uspješno poslana! Javit ćemo se uskoro.
+                </div>
+              )}
+
+              {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl mb-6 text-sm font-semibold">
+                  Greška pri slanju poruke. Pokušajte ponovo.
                 </div>
               )}
 
@@ -171,9 +180,10 @@ function Contact() {
                 {/* DUGME */}
                 <button
                   type="submit"
-                  className="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition text-sm uppercase tracking-wide"
+                  disabled={sending}
+                  className="w-full bg-red-600 text-white font-bold py-3 rounded-xl hover:bg-red-700 transition text-sm uppercase tracking-wide disabled:opacity-50"
                 >
-                  Pošalji poruku →
+                  {sending ? "Slanje..." : "Pošalji poruku →"}
                 </button>
 
               </form>

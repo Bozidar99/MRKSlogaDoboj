@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { fetchVijesti } from '../store/newsSlice'
 import { fetchIgraci } from '../store/playersSlice'
 import { fetchGalerija } from '../store/gallerySlice'
-import { MdNewspaper, MdSportsHandball, MdPhoto } from 'react-icons/md'
+import { fetchPoruke } from '../store/messagesSlice'
+import { MdNewspaper, MdSportsHandball, MdPhoto, MdEmail } from 'react-icons/md'
 import { GiTrophy } from 'react-icons/gi'
 import { Link } from 'react-router-dom'
 
@@ -12,12 +13,14 @@ function DashboardHome() {
   const { vijesti } = useSelector((state) => state.news)
   const { golmani, krila, bekovi, pivoti } = useSelector((state) => state.players)
   const { slike } = useSelector((state) => state.gallery)
+  const { poruke } = useSelector((state) => state.messages)
   const ukupnoIgraca = golmani.length + krila.length + bekovi.length + pivoti.length
 
   useEffect(() => {
     dispatch(fetchVijesti())
     dispatch(fetchIgraci())
     dispatch(fetchGalerija())
+    dispatch(fetchPoruke())
   }, [dispatch])
 
   const kartice = [
@@ -48,6 +51,13 @@ function DashboardHome() {
       ikona:  <MdPhoto size={28} />,
       boja:   "bg-gray-600",
       link:   "/dashboard/gallery"
+    },
+    {
+      naziv:  "Nepročitane poruke",
+      broj:   poruke.filter(p => !p.procitano).length,
+      ikona:  <MdEmail size={28} />,
+      boja:   "bg-blue-600",
+      link:   "/dashboard/messages"
     },
   ]
 
