@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import { MdEmail } from "react-icons/md"
 import { FaCirclePlay } from "react-icons/fa6"
 import { FaFacebook } from "react-icons/fa"
 import { FaSquareInstagram } from "react-icons/fa6"
 import { IoMdClose } from "react-icons/io"
+
+const HIMNA_URL = "https://www.youtube.com/watch?v=Hx_2SwkZxAA"
 
 function HeaderComponent({ setToggleHeader }) {
 
@@ -18,14 +21,14 @@ function HeaderComponent({ setToggleHeader }) {
       <div className='hidden md:flex items-center justify-between'>
 
         {/* HIMNA */}
-        <div className='flex items-center gap-2'>
+        <a href={HIMNA_URL} target="_blank" rel="noopener noreferrer" className='flex items-center gap-2'>
           <FaCirclePlay className='text-white hover:text-red-500 cursor-pointer transition' size={22} />
           <p className='text-white text-sm'>MRK SLOGA DOBOJ HIMNA</p>
-        </div>
+        </a>
 
         {/* DRUŠTVENE MREŽE */}
         <div className='flex items-center gap-3'>
-          <a href="https://www.facebook.com/rkslogadoboj/?locale=sr_RSs" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/rkslogadoboj/?locale=sr_RS" target="_blank" rel="noopener noreferrer">
             <FaFacebook className='text-white hover:text-red-500 cursor-pointer transition' size={22} />
           </a>
           <a href="https://www.instagram.com/mrk_sloga.doboj/" target="_blank" rel="noopener noreferrer">
@@ -34,13 +37,13 @@ function HeaderComponent({ setToggleHeader }) {
         </div>
 
         {/* EMAIL */}
-        <div className='flex items-center gap-2'>
+        <Link to="/contact" className='flex items-center gap-2'>
           <MdEmail className='text-white' size={22} />
-          <span className='text-white text-sm'>dobojrksloga@gmail.com</span>
-        </div>
+          <span className='text-white text-sm hover:text-red-500 transition'>mrksloga@gmail.com</span>
+        </Link>
 
-        {/* JEZIK */}
-        <p className='text-white text-sm cursor-pointer hover:text-red-500 transition'>SRP/EN</p>
+        {/* JEZIK 
+        <p className='text-white text-sm cursor-pointer hover:text-red-500 transition'>SRP/EN</p>*/}
 
         {/* CLOSE */}
         <IoMdClose
@@ -56,13 +59,19 @@ function HeaderComponent({ setToggleHeader }) {
 
         {/* HIMNA + MREŽE */}
         <div className='flex items-center gap-3'>
-          <FaCirclePlay className='text-white hover:text-red-500 cursor-pointer transition' size={20} />
-          <FaFacebook className='text-white hover:text-red-500 cursor-pointer transition' size={20} />
-          <FaSquareInstagram className='text-white hover:text-red-500 cursor-pointer transition' size={20} />
+          <a href={HIMNA_URL} target="_blank" rel="noopener noreferrer">
+            <FaCirclePlay className='text-white hover:text-red-500 cursor-pointer transition' size={20} />
+          </a>
+          <a href="https://www.facebook.com/rkslogadoboj/?locale=sr_RS" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className='text-white hover:text-red-500 cursor-pointer transition' size={20} />
+          </a>
+          <a href="https://www.instagram.com/mrk_sloga.doboj/" target="_blank" rel="noopener noreferrer">
+            <FaSquareInstagram className='text-white hover:text-red-500 cursor-pointer transition' size={20} />
+          </a>
         </div>
 
         {/* EMAIL skraćen */}
-        <span className='text-white text-xs'>mrksloga@gmail.com</span>
+        <Link to="/contact" className='text-white text-xs hover:text-red-500 transition'>mrksloga@gmail.com</Link>
 
         {/* CLOSE */}
         <IoMdClose
@@ -78,4 +87,3 @@ function HeaderComponent({ setToggleHeader }) {
 }
 
 export default HeaderComponent
-

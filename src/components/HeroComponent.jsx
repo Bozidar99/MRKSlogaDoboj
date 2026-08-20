@@ -1,5 +1,5 @@
 import React from 'react'
-import tim from "../assets/tim.jpg"
+import fultim from "../assets/fultim.jpg"
 import ehf from "../assets/efh.jpg"
 import ehf1 from "../assets/efh1.jpg"
 import bht from "../assets/eurotaxi-logo.png"
@@ -15,7 +15,7 @@ function HeroComponent() {
       
       {/* Slika tima - velika, samo se prilagođava širini ekrana */}
       <img 
-        src={tim} 
+        src={fultim} 
         alt='tim' 
         className="w-full md:w-260 h-64 md:h-120 object-cover rounded-2xl shadow-xl ml-0 md:ml-7 opacity-65"
       />
