@@ -5,7 +5,7 @@ import { BiSolidTrophy } from "react-icons/bi";
 
 const trofeje = [
   { naziv: "Premijer liga BiH", broj: 1, ikona: <BiSolidTrophy size={60} className="text-white" /> },
-  { naziv: "Kup BiH",           broj: 3, ikona: <GiTrophy size={60} className="text-white" /> },
+  { naziv: "Kup BiH",           broj: 2, ikona: <GiTrophy size={60} className="text-white" /> },
   { naziv: "Kup RS",            broj: 7, ikona: <HiMiniTrophy size={60} className="text-white" /> },
 ]
 

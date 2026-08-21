@@ -14,7 +14,7 @@ const statistika = [
 
 const trofiji = [
   { naziv: "Premijer liga BiH", broj: 1, ikona: <GiChampions size={50} className="text-white" /> },
-  { naziv: "Kup BiH", broj: 3, ikona: <GiTrophy size={50} className="text-white" /> },
+  { naziv: "Kup BiH", broj: 2, ikona: <GiTrophy size={50} className="text-white" /> },
   { naziv: "Kup RS", broj: 7, ikona: <GiLaurelCrown size={50} className="text-white" /> },
 ]
 
