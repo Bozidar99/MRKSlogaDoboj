@@ -1,10 +1,6 @@
 import React from 'react'
 import logofooter from "../assets/logofooter.png"
 import { NavLink } from "react-router-dom"
-import bht from "../assets/eurotaxi-logo.png"
-import ers from "../assets/logo-red.png"
-import ter from "../assets/logo.svg"
-import hero from "../assets/hero.png"
 function FooterComponent() {
 
   const navLinks = [
@@ -44,9 +40,9 @@ function FooterComponent() {
 
             {/* SOCIAL */}
             <div className="flex gap-4 mt-4 text-sm">
-              <a href="https://www.facebook.com/rkslogadoboj/?locale=sr_RS" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Facebook</a>
-              <a href="https://www.instagram.com/mrk_sloga.doboj/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a>
-              <a href="https://www.youtube.com/@mrkslogadoboj9587" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">YouTube</a>
+              <a className="hover:text-white transition">Facebook</a>
+              <a className="hover:text-white transition">Instagram</a>
+              <a className="hover:text-white transition">YouTube</a>
             </div>
           </div>
         </div>
@@ -81,18 +77,18 @@ function FooterComponent() {
           <div className="space-y-2 text-sm text-gray-400">
             <p>📍 Doboj, BiH</p>
             <p>📞 +387 65 094 185</p>
-            <p>📧 dobojrksloga@gmail.com</p>
+            <p>📧 mrkslogadoboj@gmail.com</p>
           </div>
         </div>
       </div>
 
       {/* SPONZORI BAR */}
       <div className="border-t border-gray-800 py-6">
-        <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-6 text-gray-500 text-xs uppercase tracking-widest">
-          <span><img src={bht} alt='bht' className="w-35 h-20 object-contain md:mt-12 hover:scale-110 transition duration-300 mr-15"/></span>
-          <span><img src={ers} alt='bht' className="w-35 h-20 object-contain md:mt-12 hover:scale-110 transition duration-300 mr-15"/></span>
-          <span><img src={ter} alt='bht' className="w-35 h-20 object-contain md:mt-12 hover:scale-110 transition duration-300 mr-15"/></span>
-          <span><img src={hero} alt='bht' className="w-35 h-20 object-contain md:mt-12 hover:scale-110 transition duration-300"/></span>
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-x-6 gap-y-4 text-gray-500 text-xs uppercase tracking-widest text-center">
+          <span>Sponzor 1</span>
+          <span>Sponzor 2</span>
+          <span>Sponzor 3</span>
+          <span>Sponzor 4</span>
         </div>
       </div>
 
