@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchMatchData } from '../store/matchSlice'
+import { fetchIgraci } from '../store/playersSlice'
 import duca from "../assets/duca.jpg"
 
 function parseDatumVrijeme(datum, vrijeme) {
@@ -11,13 +12,24 @@ function parseDatumVrijeme(datum, vrijeme) {
   return new Date(Number(y), Number(m) - 1, Number(d), Number(h), Number(min))
 }
 
+// Bira jednog igrača automatski, mijenja se svakih 7 dana bez ičije akcije
+function getWeeklyPlayerImage(players) {
+  const sviIgraci = players.filter(p => p.slika)
+  if (sviIgraci.length === 0) return null
+  const brojNedjelje = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000))
+  const index = brojNedjelje % sviIgraci.length
+  return sviIgraci[index]
+}
+
 function MatchComponent() {
   const dispatch = useDispatch()
   const { sljedeca, prethodna, tabela, loading } = useSelector((state) => state.match)
+  const { golmani, krila, bekovi, pivoti } = useSelector((state) => state.players)
   const [timeLeft, setTimeLeft] = useState(null)
 
   useEffect(() => {
     dispatch(fetchMatchData())
+    dispatch(fetchIgraci())
   }, [dispatch])
 
   useEffect(() => {
@@ -51,15 +63,19 @@ function MatchComponent() {
     )
   }
 
+  const sviIgraci = [...golmani, ...krila, ...bekovi, ...pivoti]
+  const nedjeljniIgrac = getWeeklyPlayerImage(sviIgraci)
+  const prikazSlika = nedjeljniIgrac ? nedjeljniIgrac.slika : duca
+
   return (
     <div className="w-full bg-white text-black py-10 md:py-20">
       <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-8 items-center lg:items-start justify-center">
 
-        {/* LIJEVA SLIKA */}
+        {/* LIJEVA SLIKA — automatski se mijenja svakih 7 dana */}
         <div className="hidden lg:flex flex-shrink-0 items-center justify-center">
           <img
-            src={duca}
-            alt="duca"
+            src={prikazSlika}
+            alt={nedjeljniIgrac ? nedjeljniIgrac.ime : "igrač"}
             className="h-[350px] object-cover rounded-xl border-10 border-red-600"
           />
         </div>
